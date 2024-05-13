@@ -64,8 +64,8 @@ console.log(obj);
   - `equals(a: any, b: any)`: does a deep equality check of two variables using the [node-deep-equal](https://github.com/inspect-js/node-deep-equal) library. It reproduces the logic of node.js's own `assert.deepEquals()` function, without the assertion.
 - Empty value checking
   - `isEmpty(input: any, options?: IsEmptyOptions)`: Checks whether the input value is 'empty' or not, based on configurable logic. By default `null` and `''` empty strings are treated as empty. Empty arrays, whitespace strings, empty objects, empty Maps and Sets, `false`, and falsy values in general can all be treated as empty.
-  - `undefinedIfEmpty(input: any, options?: IsEmptyOptions)`: Returns `undefined` if the input value is empty according to the specified rules, or the original input value if it is not empty.
-  - `deepUnsetEmptyProperties(input: any, options?: IsEmptyOptions)`: Recursively walks an input object or array, unsetting any empty properties.
+  - `toEmpty(input: any, options?: IsEmptyOptions)`: Returns `undefined` if the input value is empty according to the specified rules, or the original input value if it is not empty.
+  - `toEmptyDeep(input: any, options?: IsEmptyOptions)`: Recursively walks an input object or array, unsetting any empty properties.
 - Grab bag
   - `copy(source: object, sourcePath: string, target: object, targetPath?: string)`: copies the value of the property on the source object to the target property of the target object. If no targetPath is given, the sourcePath is used for the target object as well.
   - `move(source: object, sourcePath: string, target: object, targetPath?: string)`: same as the `copy()` function, but the property on the source object is `unset()` after copying.

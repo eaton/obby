@@ -112,17 +112,17 @@ test.failing('unset a single array item', t => {
 });
 
 test('empty values detected', t => {
-  const defaults = Object.values(empty).filter(v => !dot.isEmpty(v));
-  const onlyUndefined = Object.values(empty).filter(v => !dot.isEmpty(v, dot.onlyUndefinedIsEmpty));
-  const allEmpty = Object.values(empty).filter(v => !dot.isEmpty(v, dot.isEmptyOptsAll));
+  const defaults = Object.values(empty).filter(v => dot.isEmpty(v));
+  const onlyUndefined = Object.values(empty).filter(v => dot.isEmpty(v, { none: true }));
+  const allEmpty = Object.values(empty).filter(v => dot.isEmpty(v, { all: true }));
 
-  t.is(allEmpty.length, 0);
   t.is(defaults.length, 3);
-  t.is(onlyUndefined.length, 5);
+  t.is(allEmpty.length, 6);
+  t.is(onlyUndefined.length, 1);
 })
 
 test('deep empty filtering', t => {
   const test = { fullNumber: 1, fullArray: [1, 2, []], nested: empty, ...empty };
-  const emptied = dot.unsetEmptyProperties(test, dot.isEmptyOptsAll);
+  const emptied = dot.toEmptyDeep(test, { all: true });
   t.deepEqual(emptied, { fullArray: [1, 2], fullNumber: 1 });
 });

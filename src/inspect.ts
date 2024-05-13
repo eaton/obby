@@ -2,8 +2,7 @@ import * as dot from 'ts-dot-prop';
 import micromatch from 'micromatch';
 
 /**
- * Generate a dictionary consisting of full property paths and values for
- * a given object.
+ * Generate a dictionary property paths and matching values for a given object.
  *
  * @param input - The object to examine
  * @param filter - One or more glob-style patterns. If these are provided, only
