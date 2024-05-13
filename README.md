@@ -1,6 +1,6 @@
 # Opu
 
-A consolidated suite of object manipulation tools for Node.js.
+A consolidated suite of Typescript-friendly object manipulation tools.
 
 There's very little original code in Opu; its purpose is to make a number of disparate object access, manipulation, and comparison utilities consistent with each other and available in a shared package for my own projects.
 
