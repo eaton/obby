@@ -30,24 +30,9 @@ const obj = {
     { type: 'ssn', number: '000-00-0000' }
   ],
   addresses: {
-    home: {
-      street: '1 State Street',
-      city: 'Everyville',
-      state: 'NY',
-      zip: '12345'
-    },
-    work: {
-      street: '123 Downtown',
-      city: 'Bigsville',
-      state: 'NY',
-      zip: '12345'
-    },
-    vacation: {
-      street: '100 Seaside Blvd.',
-      city: 'Pleasantville',
-      state: 'NY',
-      zip: '0123456'
-    },
+    home: { street: '1 State Street', city: 'Everyville', state: 'NY', zip: '12345' },
+    work: { street: '123 Downtown', city: 'Bigsville', state: 'NY', zip: '12345' },
+    vacation: { street: '100 Seaside Blvd.', city: 'Pleasantville', state: 'NY', zip: '0123456' },
   },
 };
 
