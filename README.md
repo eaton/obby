@@ -1,18 +1,18 @@
-# Pathy
+# Opu
 
 A consolidated suite of object manipulation tools for Node.js.
 
-There's very little original code in Pathy; its purpose is to make a number of disparate object access, manipulation, and comparison utilities consistent with each other and available in a shared package for my own projects.
+There's very little original code in Opu; its purpose is to make a number of disparate object access, manipulation, and comparison utilities consistent with each other and available in a shared package for my own projects.
 
-Others might find it useful, too!
+'Opu' is short for 'Object Path Utilities', which is a bit reductive but is still very short. Thus, it sticks.
 
 ## Installation
 
-`npm install -s pathy`
+`npm install -s opu`
 
 ## Basic Usage
 
-Pathy uses the [ts-dot-prop](https://github.com/justinlettau/ts-dot-prop/) library to provide basic access/manipulation of object properties using dot notation. Array items can be accessed by index, and the special `*` index value can be used to reference all items in an array property.
+Opu uses the [ts-dot-prop](https://github.com/justinlettau/ts-dot-prop/) library to provide basic access/manipulation of object properties using dot notation. Array items can be accessed by index, and the special `*` index value can be used to reference all items in an array property.
 
 - `has(input: object, path: string)` returns TRUE if a property has been defined on the input object.
 - `get(input: object, path: string)` Returns the value of the property at the given path, or `undefined` if it doesn't exist. (Note: This means `has()` is the only way to determine whether a property exists but has an undefined value).
@@ -20,7 +20,7 @@ Pathy uses the [ts-dot-prop](https://github.com/justinlettau/ts-dot-prop/) libra
 - `unset(input: object, path: string)` Mutates the input object, deleting the property at the given path.
 
 ```ts
-import { has, get, set, unset } from 'pathy';
+import { has, get, set, unset } from 'opu';
 
 const obj = {
   handle: 'Bobby',
@@ -84,10 +84,10 @@ console.log(obj);
 - Grab bag
   - `copy(source: object, sourcePath: string, target: object, targetPath?: string)`: copies the value of the property on the source object to the target property of the target object. If no targetPath is given, the sourcePath is used for the target object as well.
   - `move(source: object, sourcePath: string, target: object, targetPath?: string)`: same as the `copy()` function, but the property on the source object is `unset()` after copying.
-  - `inspect(input: object, filter?: string | string[])`:  Returns a dictionary of all leaf-node properties on an object, keyed by their full path. If `filter` is supplied, it's used as a glob pattern; only paths whose keys match the pattern(s) are included.
+  - `inspect(input: object, filter?: string | string[])`: Uses the Returns a dictionary of all leaf-node properties on an object, keyed by their full path. If `filter` is supplied, it's used as a glob pattern; only paths whose keys match the pattern(s) are included.
 
 ## TODO
 
-It might make sense to split the dot-path code, emptiness checking, and clone/merge/compare stuff into separate piles. At that point, though, one might as well just use the underlying packages. Pathy is here to make all of these relatively common operations easy to use together.
+It might make sense to split the dot-path code, emptiness checking, and clone/merge/compare stuff into separate piles. At that point, though, one might as well just use the underlying packages. Opu is here to make all of these relatively common operations easy to use together.
 
-Down the line, though, it might make sense consolidate object comparison and cloning — and add diffing — to ensure their treatment of various data types and handling of edge cases stays in sync. If that happens, Pathy's public interface should still remain the same — that's the nice part about being a wrapper layer.
+Down the line, though, it might make sense consolidate object comparison and cloning — and add diffing — to ensure their treatment of various data types and handling of edge cases stays in sync. If that happens, Opu's public interface should still remain the same — that's the nice part about being a wrapper layer.

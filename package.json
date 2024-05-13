@@ -1,7 +1,7 @@
 {
-  "name": "pathy",
+  "name": "opu",
   "version": "1.0.0",
-  "description": "Dot-path based navigation and manipulation of Javascript objects.",
+  "description": "Manipulate, clone, merge, and compare Javascript objects with ease.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -57,7 +57,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eaton/pathy.git"
+    "url": "https://github.com/eaton/opu.git"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
