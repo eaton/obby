@@ -1,0 +1,80 @@
+{
+  "name": "pathy",
+  "version": "1.0.0",
+  "description": "Dot-path based navigation and manipulation of Javascript objects.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    "require": {
+      "types": "./dist/index.d.cts",
+      "default": "./dist/index.cjs"
+    },
+    "import": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "/dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "pkgroll --minify",
+    "clean": "shx rm -rf dist",
+    "prepare": "npm run clean && npm run build",
+    "test": "ava"
+  },
+  "ava": {
+    "files": [
+      "./test/**/*",
+      "!./test/fixtures"
+    ],
+    "extensions": {
+      "ts": "module"
+    },
+    "nodeArguments": [
+      "--import=tsimp"
+    ]
+  },
+  "keywords": [
+    "object",
+    "dot-path",
+    "dot-notation",
+    "typescript",
+    "clone",
+    "deep-clone",
+    "merge",
+    "deep-merge",
+    "clone",
+    "deep-clone",
+    "compare",
+    "deep-compare",
+    "deep-equals"
+  ],
+  "author": "eaton",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eaton/pathy.git"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "ava": "^6.1.2",
+    "pkgroll": "^2.0.2",
+    "shx": "^0.3.4",
+    "tsimp": "^2.0.11",
+    "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "@sindresorhus/is": "^6.3.0",
+    "@types/deep-equal": "^1.0.4",
+    "@types/micromatch": "^4.0.7",
+    "deep-equal": "^2.2.3",
+    "deepmerge-ts": "^5.1.0",
+    "micromatch": "^4.0.5",
+    "rfdc": "^1.3.1",
+    "ts-dot-prop": "^2.1.3"
+  }
+}
