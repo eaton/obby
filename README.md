@@ -61,7 +61,7 @@ console.log(obj);
 - Cloning, merging, and comparison
   - `clone(input: any)`: deep clones the input value using the [rfdc](https://github.com/davidmarkclements/rfdc) library.
   - `merge(...input: object[])`: Merges any number of objects with the [deepmerge-ts](https://github.com/RebeccaStevens/deepmerge-ts) library, respecting arrays, nested object keys, etc. Properties from 'leftmost' objects will be overwritten by same-key properties from 'later' objects in the input set.
-  - `equals(a: any, b: any)`: does a deep equality check of two variables using the [node-deep-equal](https://github.com/inspect-js/node-deep-equal) library. It reproduces the logic of node.js's own `assert.deepEquals()` function, without the assertion.
+  - `equals(a: any, b: any)`: does a deep equality check of two variables using the [fast-equals](https://github.com/planttheidea/fast-equals) library.
 - Empty value checking
   - `isEmpty(input: any, options?: IsEmptyOptions)`: Checks whether the input value is 'empty' or not, based on configurable logic. By default `null` and `''` empty strings are treated as empty. Empty arrays, whitespace strings, empty objects, empty Maps and Sets, `false`, and falsy values in general can all be treated as empty.
   - `toEmpty(input: any, options?: IsEmptyOptions)`: Returns `undefined` if the input value is empty according to the specified rules, or the original input value if it is not empty.
