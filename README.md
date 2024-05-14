@@ -69,7 +69,6 @@ console.log(obj);
 - Grab bag
   - `copy(source: object, sourcePath: string, target: object, targetPath?: string)`: copies the value of the property on the source object to the target property of the target object. If no targetPath is given, the sourcePath is used for the target object as well.
   - `move(source: object, sourcePath: string, target: object, targetPath?: string)`: same as the `copy()` function, but the property on the source object is `unset()` after copying.
-  - `inspect(input: object, filter?: string | string[])`: Uses the Returns a dictionary of all leaf-node properties on an object, keyed by their full path. If `filter` is supplied, it's used as a glob pattern; only paths whose keys match the pattern(s) are included.
 
 ## TODO
 

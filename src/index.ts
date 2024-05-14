@@ -13,6 +13,8 @@ export * from './crud.js';
 export * from './empty-options.js';
 export * from './empty.js';
 export * from './equals.js';
-export * from './inspect.js';
 export * from './merge.js';
 export * from './move.js';
+
+// Currently unsupported; ts-dot-prop stops at arrays when bulding paths.
+// export * from './inspect.js';
