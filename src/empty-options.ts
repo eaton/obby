@@ -1,5 +1,5 @@
 /**
- * Controls what values Opu's `isEmpty()`, `empty()`, and `emptyDeep()` functions
+ * Controls what values Obby's `isEmpty()`, `empty()`, and `emptyDeep()` functions
  * treats as 'empty'.
  * 
  * @defaultValue: `{ null: true, string: true }`

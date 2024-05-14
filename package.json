@@ -1,5 +1,5 @@
 {
-  "name": "opu",
+  "name": "obby",
   "version": "1.0.0",
   "description": "Manipulate, clone, merge, and compare Javascript objects with ease.",
   "type": "module",
@@ -57,7 +57,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eaton/opu.git"
+    "url": "https://github.com/eaton/obby.git"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",

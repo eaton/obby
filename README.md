@@ -1,18 +1,18 @@
-# Opu
+# Obby
 
 A consolidated suite of Typescript-friendly object manipulation tools.
 
-There's very little original code in Opu; its purpose is to make a number of disparate object access, manipulation, and comparison utilities consistent with each other and available in a shared package for my own projects.
+There's very little original code in Obby; its purpose is to make a number of disparate object access, manipulation, and comparison utilities consistent with each other and available in a shared package for my own projects.
 
-'Opu' is short for 'Object Path Utilities', which is a bit reductive but is still very short. Thus, it sticks.
+'Obby' is short for 'Object Path Utilities', which is a bit reductive but is still very short. Thus, it sticks.
 
 ## Installation
 
-`npm install -s opu`
+`npm install -s obby`
 
 ## Basic Usage
 
-Opu uses the [ts-dot-prop](https://github.com/justinlettau/ts-dot-prop/) library to provide basic access/manipulation of object properties using dot notation. Array items can be accessed by index, and the special `*` index value can be used to reference all items in an array property.
+Obby uses the [ts-dot-prop](https://github.com/justinlettau/ts-dot-prop/) library to provide basic access/manipulation of object properties using dot notation. Array items can be accessed by index, and the special `*` index value can be used to reference all items in an array property.
 
 - `has(input: object, path: string)` returns TRUE if a property has been defined on the input object.
 - `get(input: object, path: string)` Returns the value of the property at the given path, or `undefined` if it doesn't exist. (Note: This means `has()` is the only way to determine whether a property exists but has an undefined value).
@@ -20,7 +20,7 @@ Opu uses the [ts-dot-prop](https://github.com/justinlettau/ts-dot-prop/) library
 - `unset(input: object, path: string)` Mutates the input object, deleting the property at the given path.
 
 ```ts
-import { has, get, set, unset } from 'opu';
+import { has, get, set, unset } from 'obby';
 
 const obj = {
   handle: 'Bobby',
@@ -72,6 +72,6 @@ console.log(obj);
 
 ## TODO
 
-It might make sense to split the dot-path code, emptiness checking, and clone/merge/compare stuff into separate piles. At that point, though, one might as well just use the underlying packages. Opu is here to make all of these relatively common operations easy to use together.
+It might make sense to split the dot-path code, emptiness checking, and clone/merge/compare stuff into separate piles. At that point, though, one might as well just use the underlying packages. Obby is here to make all of these relatively common operations easy to use together.
 
-Down the line, though, it might make sense consolidate object comparison and cloning — and add diffing — to ensure their treatment of various data types and handling of edge cases stays in sync. If that happens, Opu's public interface should still remain the same — that's the nice part about being a wrapper layer.
+Down the line, though, it might make sense consolidate object comparison and cloning — and add diffing — to ensure their treatment of various data types and handling of edge cases stays in sync. If that happens, Obby's public interface should still remain the same — that's the nice part about being a wrapper layer.
