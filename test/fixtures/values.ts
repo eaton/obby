@@ -102,6 +102,12 @@ export const nested = {
 
 export const complex = { date, map, set, buffer, func };
 
-export const unsupported = { url, instance, nan };
+export const comparible = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible };
 
-export const all = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible, coerced };
+export const cloneable = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible, nan };
+
+export const nocompare = { instance, url, nan };
+
+export const noclone = { instance, url };
+
+export const all = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible, coerced, nocompare, noclone};

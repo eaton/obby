@@ -17,6 +17,6 @@ import reallyFastDeepClone from 'rfdc';
  * 
  * @see {@link https://github.com/davidmarkclements/rfdc}
  */
-export const clone = reallyFastDeepClone({ circles: false, proto: true });
+export const clone = reallyFastDeepClone({ circles: true, proto: true });
 
 

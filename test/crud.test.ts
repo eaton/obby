@@ -1,33 +1,6 @@
 import test from 'ava'
 import * as dot from "../src/index.js";
-import { all, nested, arrays, unsupported, empty } from './fixtures/values.js'
-
-test('clone all types', t => {
-  const cloned = dot.clone(all);
-  t.deepEqual(all, cloned);
-});
-
-test('compare all types', t => {
-  const cloned = dot.clone(all);
-  t.deepEqual(all, cloned);
-  t.is(dot.equals(all, cloned), true);
-});
-
-test('object merge', t => {
-  const partial = { 
-    l1: { 
-      value: [ 4 ],
-      l2: 'override',
-    },
-    new: 'text',
-  };
-
-  const mergedObject = dot.merge(nested, partial);
-
-  t.deepEqual(dot.get(mergedObject, 'l1.value'), [...nested.l1.value, 4]);
-  t.is(dot.get(mergedObject, 'l1.l2'), 'override');
-  t.is(dot.get(mergedObject, 'new'), 'text');
-});
+import { nested, arrays } from './fixtures/values.js'
 
 test('check properties', t => {
   t.is(dot.has(nested, 'l1.l2.l3.array.0.value'), true);
@@ -69,15 +42,6 @@ test('unset properties', t => {
   t.is(dot.get(cloned, 'value'), undefined);
 });
 
-test('clone properties', t => {
-  const target = {};
-  dot.copy(nested, 'l1', target);
-  t.deepEqual(dot.get(target, 'l1'), nested.l1);
-
-  dot.copy(nested, 'l1', target, 'alternate');
-  t.deepEqual(dot.get(target, 'alternate'), nested.l1);
-});
-
 test('array selection', t => {
   // Simple access
   t.is(dot.get(arrays, 'strings[0]'), 'first');
@@ -98,31 +62,9 @@ test.failing('negative array offsets', t => {
   t.deepEqual(dot.get(arrays, 'numbers.[0-1]'), [1, 2]);
 });
 
-// We'd like to support these types, but they're just all around unhappy. tbd.
-test.failing('unsupported types', t => {
-  const cloned = dot.clone(unsupported);
-  t.deepEqual(unsupported, cloned);
-});
-
 // Waiting on https://github.com/justinlettau/ts-dot-prop/pull/75
 test.failing('unset a single array item', t => {
   const clone = dot.clone(arrays);
   dot.unset(clone, 'numbers.0')
   t.deepEqual(dot.get(clone, 'numbers'), [2, 3]);
-});
-
-test('empty values detected', t => {
-  const defaults = Object.values(empty).filter(v => dot.isEmpty(v));
-  const onlyUndefined = Object.values(empty).filter(v => dot.isEmpty(v, { none: true }));
-  const allEmpty = Object.values(empty).filter(v => dot.isEmpty(v, { all: true }));
-
-  t.is(defaults.length, 3);
-  t.is(allEmpty.length, 6);
-  t.is(onlyUndefined.length, 1);
-})
-
-test('deep empty filtering', t => {
-  const test = { fullNumber: 1, fullArray: [1, 2, []], nested: empty, ...empty };
-  const emptied = dot.toEmptyDeep(test, { all: true });
-  t.deepEqual(emptied, { fullArray: [1, 2], fullNumber: 1 });
 });
