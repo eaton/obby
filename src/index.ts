@@ -15,6 +15,3 @@ export * from './empty.js';
 export * from './equals.js';
 export * from './merge.js';
 export * from './move.js';
-
-// Currently unsupported; ts-dot-prop stops at arrays when bulding paths.
-// export * from './inspect.js';

@@ -1,6 +1,6 @@
 import test from 'ava'
 import * as dot from "../src/index.js";
-import { comparible, nocompare } from './fixtures/values.js'
+import { TestClass, comparible, nan } from './fixtures/values.js'
 
 test('mixed types', t => {
   const cloned = dot.clone(comparible);
@@ -18,15 +18,20 @@ test('circular reference', t => {
 });
 
 test('class instance', t => {
-  t.assert(dot.equals(nocompare.instance, dot.clone(nocompare.instance)));
+  t.assert(dot.equals(new TestClass('instance'), new TestClass('instance')));
+  t.assert(!dot.equals(new TestClass('instance'), new TestClass('other')));
 });
 
-test.failing('url instance', t => {
-  t.assert(dot.equals(nocompare.url, dot.clone(nocompare.url)));
+test.failing('url', t => {
+  t.assert(dot.equals(new URL('http://example.com'), new URL('http://example.com')));
 });
 
-test.failing('nan', t => {
-  t.assert(dot.equals(nocompare.nan, NaN));
+test('regex', t => {
+  t.assert(dot.equals(/abc/g, /abc/g));
+});
+
+test('nan', t => {
+  t.assert(dot.equals(nan, NaN));
 });
 
 

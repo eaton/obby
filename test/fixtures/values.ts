@@ -1,3 +1,14 @@
+export class TestClass {
+  constructor(private v: string) {};
+  protected p = 'protected';
+  get accessor() {
+    return this.v;
+  }
+  func() {
+    return 'function value'
+  }
+}
+
 export const date = new Date(1977, 7, 16);
 
 export const map = new Map<string, number>([['first', 1], ['second', 2],['third', 3]]);
@@ -10,17 +21,11 @@ export const func = () => 'return value';
 
 export const url = new URL('https://example.com');
 
+export const regex = /[\w]+/gi;
+
 export const nan = NaN;
 
-export const instance = new (class TestClass {
-  protected value = 'protected';
-  get accessor() {
-    return 'accessor value';
-  }
-  func() {
-    return 'function value'
-  }
-})();
+export const instance = new TestClass('test');
 
 export const empty = {
   null: null,
@@ -102,11 +107,11 @@ export const nested = {
 
 export const complex = { date, map, set, buffer, func };
 
-export const comparible = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible };
+export const comparible = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible, nan };
 
-export const cloneable = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible, nan };
+export const cloneable = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible, nan, regex };
 
-export const nocompare = { instance, url, nan };
+export const nocompare = { instance, url, regex };
 
 export const noclone = { instance, url };
 

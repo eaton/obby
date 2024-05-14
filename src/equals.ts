@@ -1,12 +1,8 @@
-import deepEqual from "deep-equal";
+import { deepEqual } from 'fast-equals';
 
 /**
- * Compare objects a and b, using the Node.js `assert.deepEqual()` algorithm.
- *
- * @param strict - Use strict equality (`===`) to compare leaf nodes. By default,
- * coercive equality checks (`==`) are used.
- * @defaultValue `false`
+ * Deeply compares objects a and b.
  */
-export function equals(a: unknown, b: unknown, strict = false): boolean {
-  return deepEqual(a, b, { strict });
+export function equals(a: unknown, b: unknown): boolean {
+  return deepEqual(a, b);
 }
