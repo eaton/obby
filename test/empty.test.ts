@@ -104,8 +104,26 @@ test('empty count matches', t => {
 })
 
 test('deep empty filtering', t => {
-  const test = { fullNumber: 1, fullArray: [1, 2, []], nested: empty, ...empty };
-  const expected = { fullArray: [1, 2], fullNumber: 1 };
+  const input = {
+    fullNumber: 1,
+    fullArray: [1, 2, []],
+    fullSet: new Set(['first', '']),
+    fullMap: new Map([[1, 'one'], [2, '']]),
+    nested: empty,
+    ...empty
+  };
+  const expected = {
+    fullArray: [1, 2],
+    fullNumber: 1,
+    fullSet: new Set(['first']),
+    fullMap: new Map([[1, 'one']])
+  };
 
-  t.deepEqual(expected, dot.toEmptyDeep(test, { all: true }));
+  t.deepEqual(dot.toEmptyDeep(input, { all: true }), expected);
+});
+
+test('set filtering', t => {
+  const input = new Set(['first', '']);
+  const expected = new Set(['first']);
+  t.deepEqual(dot.toEmptyDeep(input, { all: true }), expected);
 });
