@@ -2,9 +2,7 @@
 
 A consolidated suite of Typescript-friendly object manipulation tools.
 
-There's very little original code in Obby; its purpose is to make a number of disparate object access, manipulation, and comparison utilities consistent with each other and available in a shared package for my own projects.
-
-'Obby' is short for 'Object Path Utilities', which is a bit reductive but is still very short. Thus, it sticks.
+There's very little original code in Obby; its purpose is to make a number of disparate object access, manipulation, and comparison utilities consistent with each other and available in a shared package for my own projects. In particular, the third-party libraries used are preconfigured to work consistently with each other wherever possible.
 
 ## Installation
 
@@ -58,17 +56,15 @@ console.log(obj);
 
 ## Other Helpful Functions
 
-- Cloning, merging, and comparison
+- Cloning, merging, comparison, etc.
+  - `copy(source: object, sourcePath: string, target: object, targetPath?: string)`: copies the value of the property on the source object to the target property of the target object. If no targetPath is given, the sourcePath is used for the target object as well.
+  - `move(source: object, sourcePath: string, target: object, targetPath?: string)`: same as the `copy()` function, but the property on the source object is `unset()` after copying.
   - `clone(input: any)`: deep clones the input value using the [fast-copy](https://github.com/planttheidea/fast-copy) library.
   - `merge(...input: object[])`: Merges any number of objects with the [deepmerge-ts](https://github.com/RebeccaStevens/deepmerge-ts) library, respecting arrays, nested object keys, etc. Properties from 'leftmost' objects will be overwritten by same-key properties from 'later' objects in the input set.
   - `equals(a: any, b: any)`: does a deep equality check of two variables using the [fast-equals](https://github.com/planttheidea/fast-equals) library.
 - Empty value handling via [emptier](https://github.com/eaton/emptier) and [empty-deep](https://github.com/eaton/empy-deep)
-  - `isEmpty(input: any, options?: IsEmptyOptions)`: Checks whether the input value is 'empty' or not, based on configurable logic. By default `null` and `''` empty strings are treated as empty. Empty arrays, whitespace strings, empty objects, empty Maps and Sets, `false`, and falsy values in general can all be treated as empty.
-  - `toEmpty(input: any, options?: IsEmptyOptions)`: Returns `undefined` if the input value is empty according to the specified rules, or the original input value if it is not empty.
-  - `toEmptyDeep(input: any, options?: IsEmptyOptions)`: Recursively walks an input object or array, unsetting any empty properties.
-- Grab bag
-  - `copy(source: object, sourcePath: string, target: object, targetPath?: string)`: copies the value of the property on the source object to the target property of the target object. If no targetPath is given, the sourcePath is used for the target object as well.
-  - `move(source: object, sourcePath: string, target: object, targetPath?: string)`: same as the `copy()` function, but the property on the source object is `unset()` after copying.
+  - `isEmpty(input: any, options?: IsEmptyOptions)`: Checks whether the input value is 'empty' or not, based on configurable logic. Lodash's `_.empty()` logic is followed by default (arrays, zero-length strings, nulls, empty objects, empty Maps and Sets, etc) but specific types and checks can be toggled on and off as needed. In addition, a custom empty-check function can be passed in to handle oddball classes and any other empty-ish datatypes.
+  - `emptyDeep(input: any, options?: IsEmptyOptions)`: Recursively walks an input object or array, unsetting any empty properties. If the top-level input is itself empty, undefined is returned.
 
 ## TODO
 
