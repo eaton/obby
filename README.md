@@ -59,7 +59,7 @@ console.log(obj);
 ## Other Helpful Functions
 
 - Cloning, merging, and comparison
-  - `clone(input: any)`: deep clones the input value using the [rfdc](https://github.com/davidmarkclements/rfdc) library.
+  - `clone(input: any)`: deep clones the input value using the [fast-copy](https://github.com/planttheidea/fast-copy) library.
   - `merge(...input: object[])`: Merges any number of objects with the [deepmerge-ts](https://github.com/RebeccaStevens/deepmerge-ts) library, respecting arrays, nested object keys, etc. Properties from 'leftmost' objects will be overwritten by same-key properties from 'later' objects in the input set.
   - `equals(a: any, b: any)`: does a deep equality check of two variables using the [fast-equals](https://github.com/planttheidea/fast-equals) library.
 - Empty value checking
