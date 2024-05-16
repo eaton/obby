@@ -36,7 +36,7 @@ export const empty = {
   object: {},
   set: new Set<string>(),
   map: new Map<string, string>(),
-  buffer: Buffer.from('')
+  buffer: Buffer.from(''),
 };
 
 export const coercible = {

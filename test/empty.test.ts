@@ -16,17 +16,48 @@ test('null', t => {
 });
 
 test('array', t => {
-  t.assert(!dot.isEmpty([]));
-  t.assert(dot.isEmpty([], { array: true }));
+  t.assert(dot.isEmpty([]));
+  t.assert(!dot.isEmpty([], { array: false }));
   t.assert(dot.isEmpty([], { all: true }));
   t.assert(!dot.isEmpty([], { none: true }));
 });
 
 test('string', t => {
   t.assert(dot.isEmpty(''));
-  t.assert(dot.isEmpty('', { string: true }));
+  t.assert(!dot.isEmpty('', { string: false }));
   t.assert(dot.isEmpty('', { all: true }));
   t.assert(!dot.isEmpty('', { none: true }));
+});
+
+test('object', t => {
+  t.assert(dot.isEmpty({}));
+  t.assert(!dot.isEmpty({}, { object: false }));
+  t.assert(dot.isEmpty({}, { all: true }));
+  t.assert(!dot.isEmpty({}, { none: true }));
+});
+
+test('map', t => {
+  const val = new Map<string, string>();
+  t.assert(dot.isEmpty(val));
+  t.assert(!dot.isEmpty(val, { map: false }));
+  t.assert(dot.isEmpty(val, { all: true }));
+  t.assert(!dot.isEmpty(val, { none: true }));
+});
+
+test('set', t => {
+  const val = new Set<string>();
+  t.assert(dot.isEmpty(val));
+  t.assert(!dot.isEmpty(val, { set: false }));
+  t.assert(dot.isEmpty(val, { all: true }));
+  t.assert(!dot.isEmpty(val, { none: true }));
+});
+
+test('buffer', t => {
+  const val = Buffer.from('');
+  t.assert(dot.isEmpty(val));
+  t.assert(!dot.isEmpty(val, { buffer: false }));
+  t.assert(dot.isEmpty(val, { all: true }));
+  t.assert(!dot.isEmpty(val, { none: true }));
 });
 
 test('whitespace', t => {
@@ -36,35 +67,25 @@ test('whitespace', t => {
   t.assert(!dot.isEmpty(' \t\n ', { none: true }));
 });
 
-test('object', t => {
-  t.assert(!dot.isEmpty({}));
-  t.assert(dot.isEmpty({}, { object: true }));
-  t.assert(dot.isEmpty({}, { all: true }));
-  t.assert(!dot.isEmpty({}, { none: true }));
+test('false', t => {
+  t.assert(!dot.isEmpty(false));
+  t.assert(dot.isEmpty(false, { false: true }));
+  t.assert(dot.isEmpty(false, { all: true }));
+  t.assert(!dot.isEmpty(false, { none: true }));
 });
 
-test('map', t => {
-  const val = new Map<string, string>();
-  t.assert(!dot.isEmpty(val));
-  t.assert(dot.isEmpty(val, { object: true }));
-  t.assert(dot.isEmpty(val, { all: true }));
-  t.assert(!dot.isEmpty(val, { none: true }));
+test('falsy', t => {
+  t.assert(!dot.isEmpty(0));
+  t.assert(dot.isEmpty(0, { falsy: true }));
+  t.assert(dot.isEmpty(0, { all: true }));
+  t.assert(!dot.isEmpty(0, { none: true }));
 });
 
-test('set', t => {
-  const val = new Set<string>();
-  t.assert(!dot.isEmpty(val));
-  t.assert(dot.isEmpty(val, { object: true }));
-  t.assert(dot.isEmpty(val, { all: true }));
-  t.assert(!dot.isEmpty(val, { none: true }));
-});
-
-test('buffer', t => {
-  const val = Buffer.from('');
-  t.assert(!dot.isEmpty(val));
-  t.assert(dot.isEmpty(val, { object: true }));
-  t.assert(dot.isEmpty(val, { all: true }));
-  t.assert(!dot.isEmpty(val, { none: true }));
+test('nan', t => {
+  t.assert(!dot.isEmpty(NaN));
+  t.assert(dot.isEmpty(NaN, { nan: true }));
+  t.assert(dot.isEmpty(NaN, { all: true }));
+  t.assert(!dot.isEmpty(NaN, { none: true }));
 });
 
 test('custom handler', t => {
@@ -78,7 +99,7 @@ test('empty count matches', t => {
   const allEmpty = Object.values(empty).filter(v => dot.isEmpty(v, { all: true }));
 
   t.is(allEmpty.length, 9);
-  t.is(defaults.length, 3);
+  t.is(defaults.length, 8);
   t.is(onlyUndefined.length, 1);
 })
 

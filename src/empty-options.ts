@@ -2,7 +2,7 @@
  * Controls what values Obby's `isEmpty()`, `empty()`, and `emptyDeep()` functions
  * treats as 'empty'.
  * 
- * @defaultValue: `{ null: true, string: true }`
+ * @defaultValue: `{ null: true, string: true, array: true, object: true, buffer: true, map: true, set: true }`
  */
 export type EmptyOptions = (EmptyOptionsByType | EmptyOptionsAll | EmptyOptionsNone) & EmptyOptionsCustom;
 
@@ -42,22 +42,36 @@ type EmptyOptionsByType = {
   /**
    * Treat zero-length arrays as empty.
    * 
-   * @defaultValue `false`
+   * @defaultValue `true`
    */
   array?: boolean,
 
   /**
    * Treat zero-length buffers as empty.
    * 
-   * @defaultValue `false`
+   * @defaultValue `true`
    */
   buffer?: boolean,
+
+  /**
+   * Treat zero-item sets as empty.
+   * 
+   * @defaultValue `true`
+   */
+  set?: boolean,
+
+  /**
+   * Treat zero-item maps as empty.
+   * 
+   * @defaultValue `true`
+   */
+  map?: boolean,
 
   /**
    * Treat objects with no properties, and zero-length Records, as empty when processing
    * and filtering values.
    * 
-   * @defaultValue `false`
+   * @defaultValue `true`
    */
   object?: boolean,
 
@@ -81,6 +95,13 @@ type EmptyOptionsByType = {
    * @defaultValue `false`
    */
   falsy?: boolean,
+
+  /**
+   * Treat NaN values as empty.
+   * 
+   * @defaultValue `false`
+   */
+  nan?: boolean,
 }
 
 type EmptyOptionsCustom = {

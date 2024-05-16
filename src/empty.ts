@@ -5,6 +5,11 @@ import { EmptyOptions } from "./empty-options.js";
 export const defaults: EmptyOptions = {
   null: true,
   string: true,
+  array: true,
+  buffer: true,
+  map: true,
+  set: true,
+  object: true
 }
 
 /**
@@ -20,20 +25,21 @@ export function isEmpty(input: unknown, options: EmptyOptions = {}) {
 
   if (opt.none !== true) {
     if (input === null) return !!opt.all || !!opt.null;
-    if (typeof input === 'string' && /^\s+$/.test(input)) return !!opt.all || !!opt.whitespace;
     if (typeof input === 'string' && input.length === 0) return !!opt.all || !!opt.string;
+    if (typeof input === 'string' && /^\s+$/.test(input)) return !!opt.all || !!opt.whitespace;
+    if (typeof input === 'number' && isNaN(input)) return !!opt.all || !!opt.nan;
 
-    // Check arrays first, as they technically show up as 'object'
+    // Check arrays before objects, as they technically show up as 'object'
     if (Array.isArray(input) && input.length === 0) return !!opt.all || !!opt.array;
 
     // Object comparisons; plain objects, buffers, maps, and sets are supported.
-    if (Buffer.isBuffer(input) && input.byteLength === 0) return !!opt.all || !!opt.object;
-    if (input instanceof Map && input.size === 0) return !!opt.all || !!opt.object;
-    if (input instanceof Set && input.size === 0) return !!opt.all || !!opt.object;
+    if (Buffer.isBuffer(input) && input.byteLength === 0) return !!opt.all || !!opt.buffer;
+    if (input instanceof Map && input.size === 0) return !!opt.all || !!opt.map;
+    if (input instanceof Set && input.size === 0) return !!opt.all || !!opt.set;
     if (typeof input === 'object' && input !== null && Object.keys(input).length === 0) return !!opt.all || !!opt.object;
 
-    if (!input) return !!opt.all || !!opt.falsy;
     if (input === false) return !!opt.all || !!opt.false;
+    if (!input) return !!opt.all || !!opt.falsy;
   }
   
   // Try any custom empty functions
@@ -62,7 +68,21 @@ export function toEmptyDeep(input: unknown, options?: EmptyOptions) {
   if (Array.isArray(input)) {
     return toEmpty(input.filter(i => toEmpty(i, options)));
   }
-  
+
+  if (input instanceof Set) {
+    input.forEach(v => {
+      if (isEmpty(v, options)) input.delete(v);
+    });
+    return toEmpty(input, options);
+  }
+
+  if (input instanceof Map) {
+    input.forEach((v, k) => {
+      if (isEmpty(v, options)) input.delete(k);
+    });
+    return toEmpty(input, options);
+  }
+
   if (typeof input === 'object' && input !== null) {
     for (const k in input) {
       const value = toEmptyDeep(get(input, k), options);
