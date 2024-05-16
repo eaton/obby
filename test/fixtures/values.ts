@@ -28,12 +28,15 @@ export const nan = NaN;
 export const instance = new TestClass('test');
 
 export const empty = {
-  null: null,
-  undefined: undefined,
+  undefined: undefined, // Always considered empty
+  null: null,         // Considered empty by default
+  string: '',         // Considered empty by default
   array: [],
-  string: '',
   whitespace: ' \t\n ',
   object: {},
+  set: new Set<string>(),
+  map: new Map<string, string>(),
+  buffer: Buffer.from('')
 };
 
 export const coercible = {
@@ -107,12 +110,8 @@ export const nested = {
 
 export const complex = { date, map, set, buffer, func };
 
-export const comparible = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible, nan };
+export const comparible = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible, nan, instance, regex };
 
-export const cloneable = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible, nan, regex };
+export const cloneable = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible, nan, instance, url, regex };
 
-export const nocompare = { instance, url, regex };
-
-export const noclone = { instance, url };
-
-export const all = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible, coerced, nocompare, noclone};
+export const all = { primitives, arrays, nested, complex, empty, truthy, falsy, coercible, coerced };

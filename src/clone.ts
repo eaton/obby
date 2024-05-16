@@ -1,5 +1,5 @@
-import reallyFastDeepClone from 'rfdc';
-
+// import reallyFastDeepClone from 'rfdc';
+import copy from "fast-copy";
 /**
  * Deep clone an Object, Array or Primitive value.
  * 
@@ -17,6 +17,6 @@ import reallyFastDeepClone from 'rfdc';
  * 
  * @see {@link https://github.com/davidmarkclements/rfdc}
  */
-export const clone = reallyFastDeepClone({ circles: true, proto: true });
+export const clone = copy;
 
 

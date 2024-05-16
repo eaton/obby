@@ -1,10 +1,16 @@
+import { URL } from 'node:url';
 import test from 'ava'
 import * as dot from "../src/index.js";
 import { TestClass, comparible, nan } from './fixtures/values.js'
 
-test('mixed types', t => {
-  const cloned = dot.clone(comparible);
-  t.assert(dot.equals(comparible, cloned));
+class SubClass extends TestClass {};
+class MyURL extends URL {};
+
+
+test('cloned values', t => {
+  for (const [k, v] of Object.entries(comparible)) {
+    t.assert(dot.equals(v, dot.clone(v)), k);
+  }
 });
 
 test('circular reference', t => {
@@ -18,12 +24,12 @@ test('circular reference', t => {
 });
 
 test('class instance', t => {
-  t.assert(dot.equals(new TestClass('instance'), new TestClass('instance')));
-  t.assert(!dot.equals(new TestClass('instance'), new TestClass('other')));
-});
+  const a = new TestClass('instance');
+  const b = new TestClass('instance');
+  const c = new TestClass('other');
 
-test.failing('url', t => {
-  t.assert(dot.equals(new URL('http://example.com'), new URL('http://example.com')));
+  t.assert(dot.equals(a, b));
+  t.assert(!dot.equals(a, c));
 });
 
 test('regex', t => {
@@ -34,4 +40,9 @@ test('nan', t => {
   t.assert(dot.equals(nan, NaN));
 });
 
+test.failing('url', t => {
+  const a = new URL('http://example.com');
+  const b = new URL('http://example.com');
+  t.assert(dot.equals(a, b));
+});
 
