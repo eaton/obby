@@ -3,10 +3,6 @@ import test from 'ava'
 import * as dot from "../src/index.js";
 import { TestClass, comparible, nan } from './fixtures/values.js'
 
-class SubClass extends TestClass {};
-class MyURL extends URL {};
-
-
 test('cloned values', t => {
   for (const [k, v] of Object.entries(comparible)) {
     t.assert(dot.equals(v, dot.clone(v)), k);

@@ -1,8 +1,8 @@
-import { set, get } from "ts-dot-prop";
+import { get, set } from 'ts-dot-prop';
 
 /**
  * Copy a property from a source object to a target object.
- * 
+ *
  * @remarks
  * Note that this function mutates the target object rather than returning a copy of it.
  *
@@ -11,6 +11,11 @@ import { set, get } from "ts-dot-prop";
  * @param target - The object the property should be copied to
  * @param [targetPath] - An alternative target path, if it differs from the source path.
  */
-export function copy(source: object, sourcePath: string, target: object, targetPath?: string) {
+export function copy(
+  source: object,
+  sourcePath: string,
+  target: object,
+  targetPath?: string,
+) {
   set(target, targetPath ?? sourcePath, get(source, sourcePath));
 }

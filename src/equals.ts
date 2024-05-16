@@ -1,3 +1,3 @@
-import { deepEqual } from 'fast-equals'
+import { deepEqual } from 'fast-equals';
 
 export const equals = deepEqual;

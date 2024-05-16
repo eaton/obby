@@ -3,7 +3,7 @@ import * as dot from "../src/index.js";
 import { cloneable } from './fixtures/values.js'
 
 test('all supported types', t => {
-  for (const [k, v] of Object.entries(cloneable)) {
+  for (const [, v] of Object.entries(cloneable)) {
     t.deepEqual(v, dot.clone(v));
   }
 

@@ -62,7 +62,7 @@ console.log(obj);
   - `clone(input: any)`: deep clones the input value using the [fast-copy](https://github.com/planttheidea/fast-copy) library.
   - `merge(...input: object[])`: Merges any number of objects with the [deepmerge-ts](https://github.com/RebeccaStevens/deepmerge-ts) library, respecting arrays, nested object keys, etc. Properties from 'leftmost' objects will be overwritten by same-key properties from 'later' objects in the input set.
   - `equals(a: any, b: any)`: does a deep equality check of two variables using the [fast-equals](https://github.com/planttheidea/fast-equals) library.
-- Empty value checking
+- Empty value handling via [emptier](https://github.com/eaton/emptier) and [empty-deep](https://github.com/eaton/empy-deep)
   - `isEmpty(input: any, options?: IsEmptyOptions)`: Checks whether the input value is 'empty' or not, based on configurable logic. By default `null` and `''` empty strings are treated as empty. Empty arrays, whitespace strings, empty objects, empty Maps and Sets, `false`, and falsy values in general can all be treated as empty.
   - `toEmpty(input: any, options?: IsEmptyOptions)`: Returns `undefined` if the input value is empty according to the specified rules, or the original input value if it is not empty.
   - `toEmptyDeep(input: any, options?: IsEmptyOptions)`: Recursively walks an input object or array, unsetting any empty properties.

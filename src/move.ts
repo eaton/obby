@@ -1,8 +1,8 @@
-import { set, get, remove } from "ts-dot-prop";
+import { get, remove, set } from 'ts-dot-prop';
 
 /**
  * Copy a property from one object to another, and remove it from the original object.
- * 
+ *
  * @remarks
  * Note that this function mutates the target object rather than returning a copy of it.
  *
@@ -11,7 +11,12 @@ import { set, get, remove } from "ts-dot-prop";
  * @param target - The object the property should be copied to
  * @param [targetPath] - An alternative target path, if it differs from the source path.
  */
-export const move = (source: object, sourcePath: string, target: object, targetPath?: string) => {
+export const move = (
+  source: object,
+  sourcePath: string,
+  target: object,
+  targetPath?: string,
+) => {
   set(target, targetPath ?? sourcePath, get(source, sourcePath));
   remove(source, sourcePath);
-}
+};
