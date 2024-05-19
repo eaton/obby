@@ -1,4 +1,4 @@
-import { get, remove, set } from 'ts-dot-prop';
+import { get, unset, set } from './crud.js';
 
 /**
  * Copy a property from one object to another, and remove it from the original object.
@@ -18,5 +18,5 @@ export const move = (
   targetPath?: string,
 ) => {
   set(target, targetPath ?? sourcePath, get(source, sourcePath));
-  remove(source, sourcePath);
+  unset(source, sourcePath);
 };

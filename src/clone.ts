@@ -1,4 +1,3 @@
-// import reallyFastDeepClone from 'rfdc';
 import copy from 'fast-copy';
 /**
  * Deep clone an Object, Array or Primitive value.
@@ -9,12 +8,6 @@ import copy from 'fast-copy';
  * well as a few other more complex structures (Date, Buffer, TypedArray, Map,
  * Set, and undefined).
  *
- * References to Function properties are copied to the clone objects, but
- * the Function itself is not cloned.
- *
- * All other types have output values that match the output of
- * JSON.parse(JSON.stringify(o)).
- *
- * @see {@link https://github.com/davidmarkclements/rfdc}
+ * @see {@link https://github.com/planttheidea/fast-copy}
  */
 export const clone = copy;
