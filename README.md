@@ -10,12 +10,15 @@ There's very little original code in Obby; its purpose is to make a number of di
 
 ## Basic Usage
 
-Obby uses the [ts-dot-prop](https://github.com/justinlettau/ts-dot-prop/) library to provide basic access/manipulation of object properties using dot notation. Array items can be accessed by index, and the special `*` index value can be used to reference all items in an array property.
+Obby uses the [ts-dot-prop](https://github.com/ehmicky/wild-wild-path) library, with some pre-populated defaults, to allow selection and modification of deeply nested object properties. The same syntax can be used as a simple query language; `get(myObj, 'foo.bar')` will return the `foo: { bar: ... }` property, for example. `getAll(myObj, '**.bar')` will return an array containing *any* properties stored in a key named 'bar', even if they were nested several layers down.
 
 - `has(input: object, path: string)` returns TRUE if a property has been defined on the input object.
 - `get(input: object, path: string)` Returns the value of the property at the given path, or `undefined` if it doesn't exist. (Note: This means `has()` is the only way to determine whether a property exists but has an undefined value).
-- `set(input: object, path: string, value: unknown)` Mutates the input object, creating the referenced property or overwriting it with the given value. (Note: Setting a property to `undefined` doesn't actually remove the property from the object; `unset()` is necessary for that.)
-- `unset(input: object, path: string)` Mutates the input object, deleting the property at the given path.
+- `getAll(input: object, path: string)` Returns an array of all property values whose keys match the path query.
+- `set(input: object, path: string, value: unknown)` Mutates the input object, creating the referenced property or overwriting it with the given value. (Note: Setting a property to `undefined` doesn't actually remove the property from the object; `unset()` is necessary for that. In addition, if a path query with wildcards is given, *all* matching properties will be modified.)
+- `unset(input: object, path: string)` Mutates the input object, deleting the property at the given path. If a path query with wildcards is given, *all* matching properties will be unset.
+- `flatten(input: object)` Returns a copy of the input object, with all its deeply nested property paths rendered as first-level string keys. `flatten(foo: ['bar', 'baz'])`, for example, returns `{ 'foo.0': 'bar', 'foo.1: 'baz' }`.
+- `unflatten(input: object)` Returns a copy of the input object, with all pathlike property keys expanded to nested properties.
 
 ```ts
 import { has, get, set, unset } from 'obby';
@@ -40,11 +43,11 @@ console.log(has(obj, 'name.honorific')));
 console.log(get(obj, 'name.last'));
 // output: 'Smith'
 
-console.log(get(obj, 'ids.[0].type'));
+console.log(get(obj, 'ids.0.type'));
 // output: 'drivers-license'
 
-set(obj, 'addresses.[0].city', 'Everytown');
-console.log(get(obj, 'addresses.[*].city'));
+set(obj, 'addresses.0.city', 'Everytown');
+console.log(getAll(obj, 'addresses.*.city'));
 // output: ["Everytown", "Biggsville", "Pleasantville"]
 
 unset(obj, 'name.honorific');
@@ -52,6 +55,21 @@ unset(obj, 'ids');
 unset(obj, 'addresses');
 console.log(obj);
 // output: { handle: 'Bobby', name: { first: 'Bob', last: 'Smith', suffix: 'III' } }
+
+```
+
+```ts
+import { flatten, unflatten } from 'obby';
+const myObj = {
+  foo: ['bar', 'baz'],
+  buzz: 1
+};
+const flattened = flatten(myObj);
+console.log();
+// { 'foo.0': 'bar', 'foo.1': 'baz', buzz: 1 }
+
+console.log(unflatten(flattened));
+// { foo: ['bar', 'baz'], buzz: 1 }
 ```
 
 ## Other Helpful Functions
@@ -68,6 +86,6 @@ console.log(obj);
 
 ## TODO
 
-It might make sense to split the dot-path code, emptiness checking, and clone/merge/compare stuff into separate piles. At that point, though, one might as well just use the underlying packages. Obby is here to make all of these relatively common operations easy to use together.
+Cloning objects could — in theory — be handled by the `wild-wild-path` code, but `fast-clone` is much, much, MUCH faster when all you need to do is create a clone of an object.
 
-Down the line, though, it might make sense consolidate object comparison and cloning — and add diffing — to ensure their treatment of various data types and handling of edge cases stays in sync. If that happens, Obby's public interface should still remain the same — that's the nice part about being a wrapper layer.
+Diffing is on the to-do list, but needs some care to ensure it stays in sync with the equality checking code. Few deep-equality check libraries are performant AND offer diffing.
