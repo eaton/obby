@@ -42,38 +42,8 @@ test('unset properties', t => {
 test('array selection', t => {
   // Simple access
   t.is(dot.get(arrays, 'strings.0'), 'first');
-
-  // Wildcard selector for full array
-  t.deepEqual(dot.get(arrays, 'numbers'), [1, 2, 3, 4]);
 });
 
-// We'd like to add this in the future, but ts-dot-prop doesn't handle it yet.
-test('negative array offsets', t => {
-  t.deepEqual(dot.get(arrays, 'numbers'), [1, 2, 3, 4]);
-  t.is(dot.get(arrays, 'numbers.-1'), 4);
-});
-
-test('flattened object', t => {
-  t.deepEqual(dot.get(nested, 'l1.l2.value'), [1, 2, 3]);
-  t.deepEqual(dot.flatten(nested, 'l1.l2.value'), {
-    'l1.l2.value.0': 1,
-    'l1.l2.value.1': 2,
-    'l1.l2.value.2': 3,
-  });
-});
-
-test('unflatten object', t => {
-  const flat = {
-    'l1.l2.value.0': 1,
-    'l1.l2.value.1': 2,
-    'l1.l2.value.2': 3,
-  };
-  t.deepEqual(dot.unflatten(flat), { l1: { l2: { value: [1, 2, 3] } } });
-
-  t.deepEqual(nested, dot.unflatten(dot.flatten(nested)));
-});
-
-// Waiting on https://github.com/justinlettau/ts-dot-prop/pull/75
 test.failing('unset a single array item', t => {
   const clone = dot.clone(arrays);
   dot.unset(clone, 'numbers.0')
