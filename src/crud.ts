@@ -1,16 +1,32 @@
-import * as dot from 'ts-dot-prop';
+import * as wwp from 'wild-wild-path';
 
-/** {@inheritDoc ts-dot-#has} */
-export const has = dot.has;
+export const defaultPathOptions: wwp.Options = {
+  inherited: true,
+  mutate: true,
+  classes: true,
+}
 
-/** {@inheritDoc ts-dot-#get} */
-export const get = dot.get;
+/** {@inheritDoc wild-wild-paths#has} */
+export function has(target: wwp.Target, query: wwp.Query, options?: wwp.Options) {
+  return wwp.has(target, query, { ...defaultPathOptions, ...options });
+}
 
-/** {@inheritDoc ts-dot-#set} */
-export const set = dot.set;
+/** {@inheritDoc wild-wild-paths#get} */
+export function get(target: wwp.Target, query: wwp.Query, options?: wwp.Options) {
+  return wwp.get(target, query, { ...defaultPathOptions, ...options });
+}
 
-/** {@inheritDoc ts-dot-#remove} */
-export const unset = dot.remove;
+/** {@inheritDoc wild-wild-paths#list} */
+export function getAll(target: wwp.Target, query: wwp.Query, options?: wwp.Options) {
+  return wwp.list(target, query, { ...defaultPathOptions, ...options });
+}
 
-/** {@inheritDoc ts-dot-#paths} */
-export const paths = dot.paths;
+/** {@inheritDoc wild-wild-paths#set} */
+export function set(target: wwp.Target, query: wwp.Query, value: unknown, options?: wwp.Options) {
+  return wwp.set(target, query, value, { ...defaultPathOptions, ...options });
+}
+
+/** {@inheritDoc wild-wild-paths#remove} */
+export function unset(target: wwp.Target, query: wwp.Query, options?: wwp.Options) {
+  return wwp.remove(target, query, { ...defaultPathOptions, ...options });
+}

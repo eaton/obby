@@ -1,4 +1,4 @@
-import { get, set } from 'ts-dot-prop';
+import { get, set } from './crud.js';
 
 /**
  * Copy a property from a source object to a target object.
