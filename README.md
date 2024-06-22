@@ -19,6 +19,8 @@ Obby uses the [ts-dot-prop](https://github.com/ehmicky/wild-wild-path) library, 
 - `unset(input: object, path: string)` Mutates the input object, deleting the property at the given path. If a path query with wildcards is given, *all* matching properties will be unset.
 - `flatten(input: object)` Returns a copy of the input object, with all its deeply nested property paths rendered as first-level string keys. `flatten(foo: ['bar', 'baz'])`, for example, returns `{ 'foo.0': 'bar', 'foo.1: 'baz' }`.
 - `unflatten(input: object)` Returns a copy of the input object, with all pathlike property keys expanded to nested properties.
+- `isEmpty(input: any, options?: Record<string, boolean>)` checks for "true emptiness" of a given input, based on configurable critria. Options include empty-flagging 'zero dates' of Jan 01 1970, whitespace strings, objects with no properties, arrays with no items, objects with keys but empty properties, and so on.
+- `emptyDeep(input: any, options?: Record<string, boolean>)` returns a copy of the input with all empty values stripped out. Note that the object's type can't easily be preserved: it's essentially a deep partial version of the incoming type, or (if it was completely empty) `undefined`. Improving that type checking is a future TODO.
 
 ```ts
 import { has, get, set, unset } from 'obby';
