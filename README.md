@@ -10,7 +10,7 @@ There's very little original code in Obby; its purpose is to make a number of di
 
 ## Basic Usage
 
-Obby uses the [ts-dot-prop](https://github.com/ehmicky/wild-wild-path) library, with some pre-populated defaults, to allow selection and modification of deeply nested object properties. The same syntax can be used as a simple query language; `get(myObj, 'foo.bar')` will return the `foo: { bar: ... }` property, for example. `getAll(myObj, '**.bar')` will return an array containing *any* properties stored in a key named 'bar', even if they were nested several layers down.
+Obby uses the [wild-wild-path](https://github.com/ehmicky/wild-wild-path) library, with some pre-populated defaults, to allow selection and modification of deeply nested object properties. The same syntax can be used as a simple query language; `get(myObj, 'foo.bar')` will return the `foo: { bar: ... }` property, for example. `getAll(myObj, '**.bar')` will return an array containing *any* properties stored in a key named 'bar', even if they are nested several layers down.
 
 - `has(input: object, path: string)` returns TRUE if a property has been defined on the input object.
 - `get(input: object, path: string)` Returns the value of the property at the given path, or `undefined` if it doesn't exist. (Note: This means `has()` is the only way to determine whether a property exists but has an undefined value).
